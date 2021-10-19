@@ -1,0 +1,35 @@
+
+
+
+import pandas as pd
+import numpy as np
+
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn import metrics
+from sklearn.metrics import roc_auc_score
+
+train = pd.read_csv(r'C:\Users\alex_\Desktop\Kaggle\Tabular playground - oct\train.csv')
+test = pd.read_csv(r'C:\Users\alex_\Desktop\Kaggle\Tabular playground - oct\test.csv')
+
+
+print(train.columns)
+print(train.info())
+print(train.describe())
+print(train.isnull().sum())
+print(train.nunique())
+print(train.dtypes)
+print(train['target'].value_counts())
+
+
+X = train.drop('target', axis=1) 
+y = train['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+xgboost = XGBClassifier(random_state=42)
+xgboost.fit(X_train, y_train)
+
+predictions = xgboost.predict(X_test)
+
+roc_score = roc_auc_score(y_test, predictions)
