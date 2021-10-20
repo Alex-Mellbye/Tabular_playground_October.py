@@ -34,7 +34,7 @@ predictions = xgboost.predict(X_test)
 
 roc_score = roc_auc_score(y_test, predictions)
 
-
+print(roc_score)
 
 
 
