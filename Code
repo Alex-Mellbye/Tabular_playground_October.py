@@ -33,3 +33,42 @@ xgboost.fit(X_train, y_train)
 predictions = xgboost.predict(X_test)
 
 roc_score = roc_auc_score(y_test, predictions)
+
+
+
+
+
+
+
+import pandas as pd
+import xgboost as xgb
+from sklearn.model_selection import GridSearchCV
+params = { 'max_depth': [3,6,10,12],
+           'n_estimators': [50, 100, 500, 1000]}
+xgbr = xgb.XGBRegressor(seed = 20)
+clf = GridSearchCV(estimator=xgbr, 
+                   param_grid=params,
+                   scoring='roc_auc', 
+                   verbose=1)
+clf.fit(X_train, y_train)
+print("Best parameters:", clf.best_params_)
+print("Best ROC: ", (-clf.best_score_))
+
+
+
+# plot
+pyplot.errorbar(max_depth, means, yerr=stds)
+pyplot.title("XGBoost max_depth vs Log Loss")
+pyplot.xlabel('max_depth')
+pyplot.ylabel('Log Loss')
+pyplot.savefig('max_depth.png')
+
+
+
+
+
+
+
+
+
+
