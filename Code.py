@@ -54,7 +54,8 @@ clf.fit(X_train, y_train)
 print("Best parameters:", clf.best_params_)
 print("Best ROC: ", (-clf.best_score_))
 
-
+# Best parameters: {'max_depth': 3}
+# Best ROC:  -0.850952134051909
 
 # plot
 pyplot.errorbar(max_depth, means, yerr=stds)
